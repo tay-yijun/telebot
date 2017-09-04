@@ -3,6 +3,7 @@ from telegram.ext import Updater
 from telegram.ext import CommandHandler
 import requests
 import json
+import time
 
 # Telegram bot setup
 updater = Updater(token='406484014:AAH0ik5seLM0bI07aUY78kMMiZaPuCtLAyA')
@@ -22,25 +23,28 @@ headers = {
 response = requests.request("GET", url, headers=headers, params=querystring)
 response_json = json.loads(response.text)
 
-# Fixture list from GET request
+## Fixture list from GET request
+
 def result(input):
 
     str_print = "== Upcoming Fixtures ==\n\n"
 
     for i in response_json["fixtures"]:
-        str_print += i["homeTeamName"] + " v " + i["awayTeamName"] + "\nDate: " + i["date"][:10] + "\nKickoff: " + \
-                     i["date"][11:16] + "\n\n"
+        str_print += i["homeTeamName"] + " v " + i["awayTeamName"] + "\nDate: " + i["date"][:10] + "\nKickoff: " + i["date"][11:16] + "\n\n"
+
     return str_print
 
-# Bot command definitions
+## Bot command functions
+
 def start(bot, update):
+
     bot.send_message(chat_id=update.message.chat_id, text="Bot started!")
 
 def fixture(bot, update):
-    bot.send_message(
-        chat_id=update.message.chat_id,
-        text=result(response_json)
-    )
+
+    bot.send_message(chat_id=update.message.chat_id, text=result(response_json))
+
+## Main section - bot commands
 
 start_handler = CommandHandler('start', start)
 dispatcher.add_handler(start_handler)
@@ -50,7 +54,17 @@ dispatcher.add_handler(fixture_handler)
 
 updater.start_polling()
 
+## Make sure bot is running
+
+print()
 print("Running...")
 print()
 print()
 
+## Keep bot active on Heroku - print something every 5 mins
+
+starttime = time.time()
+
+while True:
+    print("tick")
+    time.sleep(600.0 - ((time.time() - starttime) % 600.0))
