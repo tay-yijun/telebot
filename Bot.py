@@ -4,18 +4,17 @@ from telegram.ext import CommandHandler
 import requests
 import json
 import time
-# import config
 
 # Telegram bot setup
-updater = Updater(token=config.telegramKey)
-bot = telegram.Bot(token=config.telegramKey)
+updater = Updater(token=telegramKey)
+bot = telegram.Bot(token=telegramKey)
 dispatcher = updater.dispatcher
 
 # GET request from football-data.org
 url = "http://api.football-data.org/v1/fixtures/"
 querystring = {"league":"PL","timeFrame":"n7"}
 headers = {
-    'x-auth-token': config.footyKey,
+    'x-auth-token': footyKey,
     'x-response-control': "minified",
     'cache-control': "no-cache"
     }
