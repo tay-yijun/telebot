@@ -6,15 +6,15 @@ import json
 import time
 
 # Telegram bot setup
-updater = Updater(token=telegramKey)
-bot = telegram.Bot(token=telegramKey)
+updater = Updater(token="406484014:AAH0ik5seLM0bI07aUY78kMMiZaPuCtLAyA")
+bot = telegram.Bot(token="406484014:AAH0ik5seLM0bI07aUY78kMMiZaPuCtLAyA")
 dispatcher = updater.dispatcher
 
 # GET request from football-data.org
 url = "http://api.football-data.org/v1/fixtures/"
 querystring = {"league":"PL","timeFrame":"n7"}
 headers = {
-    'x-auth-token': footyKey,
+    'x-auth-token': "0c0d4ed2886a44bfa2434fe958103dac",
     'x-response-control': "minified",
     'cache-control': "no-cache"
     }
