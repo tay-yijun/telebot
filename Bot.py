@@ -4,7 +4,7 @@ from telegram.ext import CommandHandler
 import requests
 import json
 import time
-import config
+# import config
 
 # Telegram bot setup
 updater = Updater(token=config.telegramKey)
