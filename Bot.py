@@ -62,8 +62,8 @@ print()
 
 ## Keep bot active on Heroku - print something every 5 mins
 
-starttime = time.time()
-
-while True:
-    print("tick")
-    time.sleep(600.0 - ((time.time() - starttime) % 600.0))
+# starttime = time.time()
+#
+# while True:
+#     print("tick")
+#     time.sleep(600.0 - ((time.time() - starttime) % 600.0))
