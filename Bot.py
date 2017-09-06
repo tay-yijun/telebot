@@ -52,13 +52,13 @@ def result(input):
 
 def result2(input):
 
-    # table = BeautifulTable()
-    # table.column_headers = ["#","TEAM","MP","GD","PTS"]
-    # table.column_alignments["TEAM"] = BeautifulTable.ALIGN_LEFT
+    # table1 = BeautifulTable()
+    # table1.column_headers = ["#","TEAM","MP","GD","PTS"]
+    # table1.column_alignments["TEAM"] = BeautifulTable.ALIGN_LEFT
     #
     # for i in input["standing"]:
     #
-    #     table.append_row([
+    #     table1.append_row([
     #
     #         i["rank"],
     #         i["team"],
@@ -68,13 +68,12 @@ def result2(input):
     #
     #     ])
 
-    table = "Table\n\n"
+    table1 = "# | Team (Pts)\n-----------------------\n"
 
-    for i in input["standing"]:
+    for i in response_json2["standing"]:
+        table1 += "{} {} ({})\n".format(str(i["rank"]), i["team"], str(i["points"]))
 
-        table += i["rank"]
-
-    return table
+    return table1
 
 ### Bot command functions
 
