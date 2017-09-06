@@ -52,21 +52,27 @@ def result(input):
 
 def result2(input):
 
-    table = BeautifulTable()
-    table.column_headers = ["#","TEAM","MP","GD","PTS"]
-    table.column_alignments["TEAM"] = BeautifulTable.ALIGN_LEFT
+    # table = BeautifulTable()
+    # table.column_headers = ["#","TEAM","MP","GD","PTS"]
+    # table.column_alignments["TEAM"] = BeautifulTable.ALIGN_LEFT
+    #
+    # for i in input["standing"]:
+    #
+    #     table.append_row([
+    #
+    #         i["rank"],
+    #         i["team"],
+    #         i["playedGames"],
+    #         i["goalDifference"],
+    #         i["points"]
+    #
+    #     ])
+
+    table = "Table\n\n"
 
     for i in input["standing"]:
 
-        table.append_row([
-
-            i["rank"],
-            i["team"],
-            i["playedGames"],
-            i["goalDifference"],
-            i["points"]
-
-        ])
+        table += i["rank"]
 
     return table
 
