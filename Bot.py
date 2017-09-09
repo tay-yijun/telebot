@@ -2,8 +2,9 @@ import telegram
 from telegram.ext import Updater, CommandHandler
 import requests
 import json
-from beautifultable import BeautifulTable
-import time
+from datetime import datetime
+import pytz
+import tzlocal
 
 ### Telegram bot setup
 
@@ -40,33 +41,24 @@ response_json2 = json.loads(response2.text)
 
 def result(input):
 
+    local_timezone = tzlocal.get_localzone()
+
     str_print = "== Upcoming Fixtures ==\n\n"
 
     for i in input["fixtures"]:
 
-        str_print += i["homeTeamName"] + " v " + i["awayTeamName"] + "\nDate: " + i["date"][:10] + "\nKickoff: " + i["date"][11:16] + "\n\n"
+        ## convert datetime to local time
+
+        time = (datetime.strptime(i["date"], "%Y-%m-%dT%H:%M:%SZ")).replace(tzinfo=pytz.utc).astimezone(local_timezone)
+
+        str_print += i["homeTeamName"] + " v " + i["awayTeamName"] + "\nDate: " + str(time.replace(tzinfo=None))[:10] \
+                     + "\nKickoff: " + str(time.replace(tzinfo=None))[11:16] + "\n\n"
 
     return str_print
 
 ### Table from GET request
 
 def result2(input):
-
-    # table1 = BeautifulTable()
-    # table1.column_headers = ["#","TEAM","MP","GD","PTS"]
-    # table1.column_alignments["TEAM"] = BeautifulTable.ALIGN_LEFT
-    #
-    # for i in input["standing"]:
-    #
-    #     table1.append_row([
-    #
-    #         i["rank"],
-    #         i["team"],
-    #         i["playedGames"],
-    #         i["goalDifference"],
-    #         i["points"]
-    #
-    #     ])
 
     table1 = "# | Team (Pts)\n-----------------------\n"
 
@@ -108,11 +100,3 @@ print()
 print("Running...")
 print()
 print()
-
-## Keep bot active on Heroku - print something every 5 mins
-
-# starttime = time.time()
-#
-# while True:
-#     print("tick")
-#     time.sleep(600.0 - ((time.time() - starttime) % 600.0))
