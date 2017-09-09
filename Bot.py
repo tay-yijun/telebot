@@ -4,7 +4,6 @@ import requests
 import json
 from datetime import datetime
 import pytz
-import tzlocal
 
 ### Telegram bot setup
 
@@ -40,8 +39,8 @@ response_json2 = json.loads(response2.text)
 ### Fixture list from GET request
 
 def result(input):
-
-    local_timezone = tzlocal.get_localzone()
+    
+    local_timezone = pytz.timezone("Asia/Singapore")
 
     str_print = "== Upcoming Fixtures ==\n\n"
 
