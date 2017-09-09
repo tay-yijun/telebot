@@ -71,7 +71,7 @@ def result2(input):
     table1 = "# | Team (Pts)\n-----------------------\n"
 
     for i in response_json2["standing"]:
-        table1 += "{} {} ({})\n".format(str(i["rank"]), i["team"], str(i["points"]))
+        table1 += "{} {} ({})\n".format(str(i["rank"]), i["team"].replace("ManU", "Man United"), str(i["points"]))
 
     return table1
 
