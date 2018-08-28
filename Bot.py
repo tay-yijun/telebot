@@ -13,7 +13,7 @@ dispatcher = updater.dispatcher
 
 ### GET request for Fixtures from football-data.org
 
-url = "http://api.football-data.org/v1/fixtures/"
+url = "http://api.football-data.org/v2/fixtures/"
 querystring = {"league":"PL","timeFrame":"n7"}
 headers = {
     'x-auth-token': "0c0d4ed2886a44bfa2434fe958103dac",
@@ -26,7 +26,7 @@ response_json = json.loads(response.text)
 
 ### GET request for Table from football-data.org
 
-url2 = "http://api.football-data.org/v1/competitions/445/leagueTable"
+url2 = "http://api.football-data.org/v2/competitions/445/leagueTable"
 headers2 = {
     'x-auth-token': "0c0d4ed2886a44bfa2434fe958103dac",
     'x-response-control': "minified",
